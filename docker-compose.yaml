@@ -20,6 +20,7 @@ services:
     image: rabbitmq:4.0.2-management
     container_name: 'servicos_rabbitmq'
     hostname: servicos_rabbitmq
+    restart: always
     volumes:
         - servicos_rabbitmq_data:/var/lib/rabbitmq/
         - ./backups:/backups
@@ -48,16 +49,16 @@ services:
       - 5432:5432
 
   # roda na porta 6432
-  servicos_pgbouncer:
-    container_name: servicos_pgbouncer
-    restart: always
-    image: bitnami/pgbouncer:latest
-    networks:
-      - servicos_network
-    env_file:
-      - .env
-    ports:
-      - 6432:6432
+  # servicos_pgbouncer:
+  #   container_name: servicos_pgbouncer
+  #   restart: always
+  #   image: bitnami/pgbouncer:latest
+  #   networks:
+  #     - servicos_network
+  #   env_file:
+  #     - .env
+  #   ports:
+  #     - 6432:6432
 
 
 volumes:
