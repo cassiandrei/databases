@@ -8,7 +8,7 @@ services:
     volumes:
       - servicos_redis_data:/data
     networks:
-      - servicos_network
+      - servicos
     command: redis-server --appendonly yes
     env_file:
       - .env
@@ -25,7 +25,7 @@ services:
         - servicos_rabbitmq_data:/var/lib/rabbitmq/
         - ./backups:/backups
     networks:
-      - servicos_network
+      - servicos
     env_file:
       - .env
     ports:
@@ -42,7 +42,7 @@ services:
       - servicos_postgres_data:/var/lib/postgresql/data/
       - ./backups:/backups
     networks:
-      - servicos_network
+      - servicos
     env_file:
       - .env
     ports:
@@ -54,7 +54,7 @@ services:
   #   restart: always
   #   image: bitnami/pgbouncer:latest
   #   networks:
-  #     - servicos_network
+  #     - servicos
   #   env_file:
   #     - .env
   #   ports:
@@ -70,5 +70,5 @@ volumes:
     name: servicos_rabbitmq_data
 
 networks:
-  servicos_network:
+  servicos:
     external: true
