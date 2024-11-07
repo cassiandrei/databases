@@ -37,16 +37,37 @@ services:
     container_name: servicos_postgres
     restart: always
     image: postgres:16.1-bullseye
-    shm_size: 1gb
     volumes:
       - servicos_postgres_data:/var/lib/postgresql/data/
       - ./backups:/backups
+      - ./volumes/postgres/postgresql.conf:/volumes/postgres/postgresql.conf
+    command: postgres -c 'config_file=/volumes/postgres/postgresql.conf'
     networks:
       - servicos
     env_file:
       - .env
     ports:
-      - 5432:5432
+      - 5432:5432    
+    # shm_size: 1gb
+    # mem_limit: 2GB
+    blkio_config:
+      #  weight: 300
+      #  weight_device:
+      #    - path: /dev/sda
+      #      weight: 400
+       device_read_bps:
+         - path: /dev/sda
+           rate: 12mb
+      #  device_read_iops:
+      #    - path: /dev/sdb
+      #      rate: 120
+       device_write_bps:
+         - path: /dev/sda
+           rate: 1mb
+       device_write_iops:
+         - path: /dev/sda
+           rate: 1mb
+
 
   # roda na porta 6432
   # servicos_pgbouncer:
