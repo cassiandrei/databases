@@ -18,3 +18,7 @@ será necessário duas coisas:
   export PGHOST="localhost"
   export PGUSER="<usuário que você colocou lá no .env>"
   ```
+
+# Recomendação
+
+faça um fork deste repositório para fazer seus próprios ajustes e ter disponível no seu próprio github
