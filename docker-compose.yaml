@@ -68,6 +68,8 @@ services:
     container_name: servicos_mongo
     image: mongo
     restart: always
+    volumes:
+      - servicos_mongo_data:/data/db
     ports:
       - 27017:27017
     env_file:
@@ -83,6 +85,7 @@ services:
     env_file:
       - .env
 
+
 volumes:
   servicos_postgres_data:
     name: servicos_postgres_data
@@ -90,6 +93,9 @@ volumes:
     name: servicos_redis_data
   servicos_rabbitmq_data:
     name: servicos_rabbitmq_data
+  servicos_mongo_data:
+    name: servicos_mongo_data
+
 
 networks:
   servicos:
