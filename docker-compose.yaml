@@ -85,6 +85,16 @@ services:
     env_file:
       - .env
 
+  # qdrant na porta 6333/serviço e dashboard e 6334/grpc
+  servicos_qdrant:
+    container_name: servicos_qdrant
+    image: qdrant/qdrant
+    restart: always
+    volumes:
+      - servicos_qdrant_data:/qdrant/storage:z
+    ports:
+      - 6333:6333
+      - 6334:6334
 
 volumes:
   servicos_postgres_data:
@@ -95,6 +105,8 @@ volumes:
     name: servicos_rabbitmq_data
   servicos_mongo_data:
     name: servicos_mongo_data
+  servicos_qdrant_data:
+    name: servicos_qdrant_data
 
 
 networks:
